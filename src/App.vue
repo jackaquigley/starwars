@@ -1,17 +1,26 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="">
+    <film-list v-if="films.length" :films="films"></film-list>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FilmList from './components/FilmList.vue'
+import {eventBus} from './main.js'
 
 export default {
-  name: 'App',
+  data() {
+    return {
+      films: []
+    }
+  },
   components: {
-    HelloWorld
+    'film-list': FilmList
+  },
+  mounted(){
+  fetch('https://swapi.dev/api/films/')
+  .then(res => res.json())
+  .then(data => this.films = data.results)
   }
 }
 </script>
