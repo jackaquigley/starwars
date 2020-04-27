@@ -1,15 +1,22 @@
 <template lang="html">
   <div v-if="films">
     <ul>
-      <li v-for="(film, index) in films" :film="film" :key="index">{{film.title}}</li>
+      <film-item v-for="(film, index) in films" :film="film" :key="index"></film-item>
+
     </ul>
   </div>
 </template>
 
 <script>
+
+import FilmItem from '@/components/FilmItem.vue'
+
 export default {
   name: 'film-list',
-  props: ['film', 'films']
+  props: ['films'],
+  components: {
+    'film-item': FilmItem
+  }
 }
 </script>
 
